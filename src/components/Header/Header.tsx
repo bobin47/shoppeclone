@@ -31,8 +31,6 @@ export default function Header() {
   })
   const purchaseIncart = purchaseInCard?.data.data
 
-  console.log(purchaseInCard?.data.data)
-
   const logoutMutation = useMutation({
     mutationFn: authApi.logoutAccount,
     onSuccess: () => {

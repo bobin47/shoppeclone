@@ -2,9 +2,8 @@ import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { userApi } from '../../../../api/user.api'
-import { UserSchema, userSchema } from '../../../../utils/rules'
+import { UserSchema } from '../../../../utils/rules'
 import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import DateSelect from '../../components/DateSelect'
 import { toast } from 'react-toastify'
@@ -13,8 +12,6 @@ import { AppContext } from '../../../../contexts/App.context'
 import { setProfileToLS } from '../../../../utils/auth'
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'date_of_birth' | 'avatar'>
-
-const profileSchema = userSchema.pick(['name', 'address', 'phone', 'date_of_birth', 'avatar'])
 
 export default function Profile() {
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -46,8 +43,8 @@ export default function Profile() {
       address: '',
       avatar: '',
       date_of_birth: new Date(1990, 0, 1)
-    },
-    resolver: yupResolver(profileSchema)
+    }
+    // resolver: yupResolver(profileSchema)
   })
 
   useEffect(() => {
@@ -59,9 +56,8 @@ export default function Profile() {
       setValue('date_of_birth', profile.date_of_birth ? new Date(profile.date_of_birth) : new Date(1990, 0, 1))
     }
   }, [profile, setValue])
-
-  console.log(profile)
   const avatar = watch('avatar')
+  console.log(avatar)
 
   const onSubmit = handleSubmit(async (data) => {
     let avatarName = avatar
@@ -75,7 +71,7 @@ export default function Profile() {
       }
       const res = await updateProfileMutation.mutateAsync({
         ...data,
-        date_of_birth: data.date_of_birth?.toISOString() as string,
+        date_of_birth: data.date_of_birth?.toISOString(),
         avatar: avatarName
       })
       setProfile(res.data.data)
