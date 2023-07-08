@@ -1,11 +1,10 @@
-import React from 'react'
-import { QueryConfig } from '../../ProductList'
 import { sortBy, order as orderConst } from '../../../../constants/product.constants'
 import { ProductListConfig } from '../../../../types/product.type'
 import classNames from 'classnames'
 import { createSearchParams, useNavigate, Link } from 'react-router-dom'
 import { path } from '../../../../constants/path'
 import { omit } from 'lodash'
+import { QueryConfig } from '../../../../hooks/useQueryConfig'
 
 interface Props {
   queryConfig: QueryConfig

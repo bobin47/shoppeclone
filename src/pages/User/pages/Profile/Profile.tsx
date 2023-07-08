@@ -75,7 +75,7 @@ export default function Profile() {
       }
       const res = await updateProfileMutation.mutateAsync({
         ...data,
-        date_of_birth: data.date_of_birth?.toISOString(),
+        date_of_birth: data.date_of_birth?.toISOString() as string,
         avatar: avatarName
       })
       setProfile(res.data.data)

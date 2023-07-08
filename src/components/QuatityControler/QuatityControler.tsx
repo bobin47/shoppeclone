@@ -4,7 +4,7 @@ interface Props extends InputNumberProps {
   max?: number
   onIncrease: (value: number) => void
   onDecrease: (value: number) => void
-  onType: (value: number) => void
+  onType?: (value: number) => void
   classNameWrapper?: string
 }
 
