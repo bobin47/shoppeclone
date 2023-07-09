@@ -2,7 +2,7 @@ import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { userApi } from '../../../../api/user.api'
-import { UserSchema, userSchema } from '../../../../utils/rules'
+import { UserSchema } from '../../../../utils/rules'
 import { useForm, Controller } from 'react-hook-form'
 import { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import DateSelect from '../../components/DateSelect'
@@ -10,7 +10,6 @@ import { toast } from 'react-toastify'
 import { getAvatarUrl } from '../../../../utils/utils'
 import { AppContext } from '../../../../contexts/App.context'
 import { setProfileToLS } from '../../../../utils/auth'
-import { yupResolver } from '@hookform/resolvers/yup'
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'date_of_birth' | 'avatar'>
 export default function Profile() {
