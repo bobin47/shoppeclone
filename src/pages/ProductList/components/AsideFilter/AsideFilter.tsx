@@ -7,6 +7,7 @@ import { QueryConfig } from '../../../../hooks/useQueryConfig'
 import classNames from 'classnames'
 import { useForm, Controller } from 'react-hook-form'
 import { omit } from 'lodash'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   categories: Category[]
@@ -19,6 +20,7 @@ type FormData = {
 }
 
 export default function AsideFilter({ categories, queryConfig }: Props) {
+  const { t } = useTranslation()
   const { category } = queryConfig
   const navigate = useNavigate()
   const { control, handleSubmit, reset } = useForm<FormData>({
@@ -64,7 +66,7 @@ export default function AsideFilter({ categories, queryConfig }: Props) {
             </g>
           </g>
         </svg>
-        Tất cả danh mục
+        {t('aside filter.all category')}
       </Link>
       <div className='my-4 h-[1px] bg-gray-300' />
       <ul>
