@@ -1,6 +1,7 @@
 /* eslint-disable import/no-named-as-default-member */
 import axios, { AxiosError } from 'axios'
 import httpStatusCode from '../constants/httpStatusCode.emum'
+import { ErrorResponseApi } from '../types/utils.type'
 
 export function isAxiosError(error: unknown): error is AxiosError {
   return axios.isAxiosError(error)
@@ -8,6 +9,17 @@ export function isAxiosError(error: unknown): error is AxiosError {
 
 export function isAxiosUnprocessableEntityError<FormError>(error: unknown): error is AxiosError<FormError> {
   return isAxiosError(error) && error.response?.status === httpStatusCode.UnprocessableEntity
+}
+
+export function isAxiosUnauthorizedError<UnauthorizedError>(error: unknown): error is AxiosError<UnauthorizedError> {
+  return isAxiosError(error) && error.response?.status === httpStatusCode.Unauthorized
+}
+
+export function isAxiosExpiredTokenError<UnauthorizedError>(error: unknown): error is AxiosError<UnauthorizedError> {
+  return (
+    isAxiosUnauthorizedError<ErrorResponseApi<{ name: string; message: string }>>(error) &&
+    error.response?.data?.data?.name === 'EXPIRED_TOKEN'
+  )
 }
 
 export function formatCurrency(currency: number) {

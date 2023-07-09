@@ -19,7 +19,6 @@ import { useTranslation } from 'react-i18next'
 export default function Header() {
   const { i18n } = useTranslation()
   const currentLanguage = locales[i18n.language as keyof typeof locales]
-  console.log(i18n.language)
   const { setIsAuthenticated, isAuthenticated, profile, setProfile } = useContext(AppContext)
   const queryConfig = useQueryConfig()
   const navigate = useNavigate()
@@ -35,7 +34,6 @@ export default function Header() {
     enabled: isAuthenticated
   })
   const purchaseIncart = purchaseInCard?.data.data
-  console.log(currentLanguage)
   const logoutMutation = useMutation({
     mutationFn: authApi.logoutAccount,
     onSuccess: () => {
